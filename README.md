@@ -14,13 +14,12 @@
 也是这个圈子的新人
 
 如果您觉得我的文章还不错，请送我一颗星星，那对我真的很重要QAQ
-[表情包1](https://github.com/qzgeek/qzgeek/blob/main/59468.jpg.jpg.jpg_10833A149651EFBBC64EE62C2D195C15.jpg.jpg)
 
 当然，如果您对我的文章有意见或者看法，欢迎留言，我看到后会及时处理
 
 谢谢！
 
-[表情包2](https://github.com/qzgeek/qzgeek/blob/main/20210522180031226 (1).gif)
+[表情包2](https://github.com/qzgeek/qzgeek/blob/main/谢谢.gif)
 
 # 联系方式
 
