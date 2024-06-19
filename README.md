@@ -19,8 +19,6 @@
 
 谢谢！
 
-[表情包2](https://github.com/qzgeek/qzgeek/blob/main/谢谢.gif)
-
 # 联系方式
 
 ## 邮箱
