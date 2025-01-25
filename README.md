@@ -19,21 +19,3 @@
 
 谢谢！
 
-# 联系方式
-
-## 邮箱
-
-- xcgeek@163.com
-
-## 社交平台
-<h3 align="left">众里寻他千百度:</h3>
-<p align="left">
-<a href="https://space.bilibili.com/620655009"><img src="https://img.shields.io/badge/bilibili-%E5%93%94%E5%93%A9%E5%93%94%E5%93%A9-critical" alt="哔哩哔哩" /></a>
-</p>
-
-# 我的文章
-
-1. [Dhizuku用户手册](https://github.com/qzgeek/Dhizuku)
-
-2. 没了
-
