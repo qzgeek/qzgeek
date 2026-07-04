@@ -4,293 +4,281 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>黔中极客 · QZGeek</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #0a0a0f;
-            --surface: #12121a;
-            --surface2: #1a1a2e;
-            --border: #252540;
-            --text: #e0e0f0;
-            --muted: #7a7a9a;
-            --accent: #6c8cff;
-            --accent2: #a78bfa;
-            --green: #4ade80;
-            --orange: #fb923c;
-            --pink: #f472b6;
-            --cyan: #22d3ee;
+            --ink: #2c2c2c;
+            --paper: #faf7f2;
+            --paper2: #f0ebe0;
+            --vermillion: #c04040;
+            --gold: #b8944e;
+            --jade: #5b8c5a;
+            --celadon: #8fbfb0;
+            --mist: #d4cfc4;
+            --light-ink: #6b6b6b;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        
+
         body {
-            font-family: 'Noto Sans SC', -apple-system, sans-serif;
-            background: var(--bg);
-            color: var(--text);
+            font-family: 'Noto Serif SC', 'STSong', 'SimSun', 'Songti SC', serif;
+            background: var(--paper);
+            color: var(--ink);
             min-height: 100vh;
-            line-height: 1.6;
+            line-height: 1.8;
             overflow-x: hidden;
         }
 
-        /* Animated background */
-        .bg-glow {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none; z-index: 0;
-            background: 
-                radial-gradient(ellipse 80% 50% at 20% 0%, rgba(108,140,255,0.08) 0%, transparent 50%),
-                radial-gradient(ellipse 60% 40% at 80% 100%, rgba(167,139,250,0.06) 0%, transparent 50%);
-        }
-
-        /* Grid overlay */
-        .grid-overlay {
+        /* Ink wash mountain background */
+        .mountains {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none; z-index: 0; opacity: 0.03;
-            background-image: 
-                linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px);
-            background-size: 60px 60px;
+            pointer-events: none; z-index: 0; opacity: 0.06;
         }
+        .mountains svg { width: 100%; height: 100%; }
 
-        .container { max-width: 800px; margin: 0 auto; padding: 0 1.5rem; position: relative; z-index: 1; }
+        .container { max-width: 680px; margin: 0 auto; padding: 0 1.5rem; position: relative; z-index: 1; }
 
         /* Hero */
         .hero {
             text-align: center;
-            padding: 6rem 0 4rem;
-            position: relative;
+            padding: 5rem 0 3rem;
         }
-        .hero .avatar {
-            width: 100px; height: 100px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--accent), var(--accent2));
-            display: flex; align-items: center; justify-content: center;
-            margin: 0 auto 1.5rem;
-            font-size: 2.5rem;
-            box-shadow: 0 0 40px rgba(108,140,255,0.3);
-            animation: float 3s ease-in-out infinite;
-        }
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
-        }
-        .hero h1 {
-            font-size: 3rem; font-weight: 700;
-            background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 50%, var(--cyan) 100%);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 0.5rem;
-            letter-spacing: 0.05em;
-        }
-        .hero .tagline {
-            color: var(--muted);
-            font-size: 1.1rem;
-            font-family: 'Fira Code', monospace;
-            letter-spacing: 0.1em;
-        }
-        .hero .typewriter {
+        .fox {
             display: inline-block;
-            border-right: 2px solid var(--accent);
-            animation: blink 0.8s infinite;
-            padding-right: 4px;
-        }
-        @keyframes blink { 50% { border-color: transparent; } }
-
-        /* Poem card */
-        .poem-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 2rem;
-            margin: 2rem 0;
-            text-align: center;
             position: relative;
-            overflow: hidden;
+            animation: foxFloat 4s ease-in-out infinite;
         }
-        .poem-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 4px; height: 100%;
-            background: linear-gradient(180deg, var(--accent), var(--accent2), var(--pink));
-            border-radius: 4px 0 0 4px;
+        @keyframes foxFloat {
+            0%, 100% { transform: translateY(0) rotate(-2deg); }
+            50% { transform: translateY(-6px) rotate(2deg); }
         }
-        .poem-card p {
-            color: var(--muted);
+        .fox svg { width: 100px; height: 100px; }
+
+        .hero h1 {
+            font-size: 2.6rem; font-weight: 400;
+            color: var(--ink);
+            margin: 1rem 0 0.3rem;
+            letter-spacing: 0.15em;
+        }
+        .hero .english {
+            font-size: 0.95rem;
+            color: var(--light-ink);
+            letter-spacing: 0.3em;
+            font-family: 'Georgia', 'Noto Serif SC', serif;
             font-style: italic;
-            line-height: 2.2;
+        }
+        .hero .divider {
+            width: 40px; height: 2px;
+            background: var(--vermillion);
+            margin: 1rem auto;
+            border-radius: 1px;
+        }
+
+        /* Poem */
+        .poem {
+            text-align: center;
+            padding: 2rem 1.5rem;
+            margin: 0 0 2.5rem;
+            border-top: 1px solid var(--mist);
+            border-bottom: 1px solid var(--mist);
+            position: relative;
+        }
+        .poem::before, .poem::after {
+            content: '◆';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--vermillion);
+            font-size: 0.5rem;
+            opacity: 0.6;
+        }
+        .poem::before { top: -0.4rem; }
+        .poem::after { bottom: -0.4rem; }
+        .poem p {
             font-size: 1.1rem;
-            font-weight: 300;
+            color: var(--light-ink);
+            line-height: 2.4;
+            font-style: italic;
         }
 
-        /* Link buttons */
+        /* Links */
         .links {
-            display: flex; gap: 1rem;
+            display: flex; gap: 1.5rem;
             justify-content: center; flex-wrap: wrap;
-            margin: 2rem 0;
+            margin: 0 0 3rem;
         }
-        .btn {
-            display: inline-flex; align-items: center; gap: 0.5rem;
-            padding: 0.7rem 1.5rem;
-            border-radius: 12px;
+        .links a {
+            display: inline-flex; align-items: center; gap: 0.4rem;
+            padding: 0.5rem 1.6rem;
+            border-radius: 0;
             text-decoration: none;
-            font-size: 0.95rem; font-weight: 500;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 1px solid var(--border);
-            background: var(--surface);
-            color: var(--text);
-            position: relative; overflow: hidden;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            border-bottom: 2px solid transparent;
+            color: var(--ink);
+            font-family: inherit;
         }
-        .btn::after {
-            content: ''; position: absolute; inset: 0;
-            background: linear-gradient(135deg, transparent, rgba(255,255,255,0.03));
-            opacity: 0; transition: opacity 0.3s;
-        }
-        .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.4); }
-        .btn:hover::after { opacity: 1; }
-        .btn.web { border-color: var(--accent); color: var(--accent); }
-        .btn.web:hover { background: rgba(108,140,255,0.1); }
-        .btn.gh { border-color: var(--green); color: var(--green); }
-        .btn.gh:hover { background: rgba(74,222,128,0.1); }
-        .btn.mail { border-color: var(--pink); color: var(--pink); }
-        .btn.mail:hover { background: rgba(244,114,182,0.1); }
+        .links a:hover { border-bottom-color: var(--vermillion); color: var(--vermillion); }
 
-        /* Section title */
-        .section-title {
-            display: flex; align-items: center; gap: 0.75rem;
-            margin: 3rem 0 1.5rem;
-            font-size: 1.3rem; font-weight: 600;
-            color: var(--text);
+        /* Section */
+        .section {
+            margin: 2.5rem 0;
         }
-        .section-title .icon { font-size: 1.4rem; }
-        .section-title::after {
-            content: ''; flex: 1; height: 1px;
-            background: linear-gradient(90deg, var(--border), transparent);
+        .section-title {
+            text-align: center;
+            font-size: 1.1rem; font-weight: 400;
+            color: var(--gold);
+            letter-spacing: 0.15em;
+            margin-bottom: 1.5rem;
+            display: flex; align-items: center; justify-content: center; gap: 0.8rem;
+        }
+        .section-title::before, .section-title::after {
+            content: '';
+            width: 30px; height: 1px;
+            background: var(--mist);
         }
 
         /* About */
-        .about-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin: 1.5rem 0;
-        }
-        .about-item {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 1.25rem;
+        .about-text {
             text-align: center;
+            max-width: 420px; margin: 0 auto;
+            color: var(--light-ink);
+            font-size: 0.95rem;
+            line-height: 2;
+        }
+        .about-text .highlight {
+            color: var(--vermillion);
+        }
+
+        /* Tags */
+        .tag-row {
+            display: flex; gap: 0.6rem; justify-content: center;
+            flex-wrap: wrap; margin: 1.5rem 0;
+        }
+        .tag {
+            padding: 0.3rem 1rem;
+            border: 1px solid var(--mist);
+            font-size: 0.8rem;
+            color: var(--light-ink);
             transition: all 0.3s;
+            cursor: default;
         }
-        .about-item:hover {
-            border-color: var(--accent);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 20px rgba(108,140,255,0.1);
+        .tag:hover {
+            border-color: var(--vermillion);
+            color: var(--vermillion);
+            background: rgba(192,64,64,0.04);
         }
-        .about-item .emoji { font-size: 1.8rem; margin-bottom: 0.5rem; display: block; }
-        .about-item .label { font-size: 0.85rem; color: var(--muted); }
-        .about-item .value { font-size: 1.05rem; font-weight: 500; color: var(--text); }
 
         /* Stats card */
         .stats-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 1.5rem;
-            margin: 1.5rem 0;
             text-align: center;
-            transition: border-color 0.3s;
+            padding: 2rem 1rem;
+            background: var(--paper2);
+            border-radius: 2px;
+            margin: 0 auto;
+            max-width: 480px;
         }
-        .stats-card:hover { border-color: var(--accent2); }
         .stats-card img {
             max-width: 100%; height: auto;
-            border-radius: 8px;
-            filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3));
-        }
-        .stats-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-            margin: 1rem 0;
-        }
-        @media (max-width: 640px) {
-            .stats-row { grid-template-columns: 1fr; }
-            .hero h1 { font-size: 2rem; }
-            .hero { padding: 4rem 0 2rem; }
-        }
-
-        /* Timeline */
-        .timeline { position: relative; padding-left: 2rem; margin: 2rem 0; }
-        .timeline::before {
-            content: ''; position: absolute; left: 0; top: 0; bottom: 0;
-            width: 2px;
-            background: linear-gradient(180deg, var(--accent), var(--accent2), var(--pink));
-        }
-        .timeline-item {
-            position: relative;
-            margin-bottom: 1.5rem;
-            padding-left: 1.5rem;
-        }
-        .timeline-item::before {
-            content: ''; position: absolute; left: -2.35rem; top: 0.5rem;
-            width: 10px; height: 10px;
-            border-radius: 50%;
-            background: var(--accent);
-            border: 2px solid var(--surface);
-            box-shadow: 0 0 10px rgba(108,140,255,0.5);
-        }
-        .timeline-item .date {
-            font-size: 0.8rem; color: var(--muted);
-            font-family: 'Fira Code', monospace;
-        }
-        .timeline-item .content {
-            color: var(--text);
-            font-size: 0.95rem;
+            border-radius: 2px;
         }
 
         /* Footer */
         footer {
             text-align: center;
-            padding: 3rem 1rem 2rem;
-            color: var(--muted);
-            font-size: 0.85rem;
+            padding: 4rem 1rem 3rem;
+            color: var(--mist);
+            font-size: 0.8rem;
+            letter-spacing: 0.08em;
         }
-        footer .heart { color: var(--pink); animation: pulse 1.5s ease-in-out infinite; display: inline-block; }
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.2); }
+        footer .stamp {
+            display: inline-block;
+            width: 36px; height: 36px;
+            border: 2px solid var(--vermillion);
+            border-radius: 50%;
+            color: var(--vermillion);
+            font-size: 0.7rem;
+            line-height: 32px;
+            margin-bottom: 0.8rem;
+            opacity: 0.6;
         }
 
-        /* Fade-in animation */
-        .fade-in {
-            opacity: 0; transform: translateY(20px);
-            animation: fadeIn 0.6s ease-out forwards;
+        /* Floating petals */
+        .petal {
+            position: fixed;
+            pointer-events: none; z-index: 0;
+            animation: fall linear forwards;
+            opacity: 0.15;
+            font-size: 1.2rem;
         }
-        @keyframes fadeIn {
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes fall {
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.2; }
+            90% { opacity: 0.15; }
+            100% { transform: translateY(105vh) rotate(360deg); opacity: 0; }
         }
-        .delay-1 { animation-delay: 0.1s; }
-        .delay-2 { animation-delay: 0.2s; }
-        .delay-3 { animation-delay: 0.3s; }
-        .delay-4 { animation-delay: 0.4s; }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 2rem; }
+            .hero { padding: 3rem 0 2rem; }
+            .fox svg { width: 80px; height: 80px; }
+        }
     </style>
 </head>
 <body>
-    <div class="bg-glow"></div>
-    <div class="grid-overlay"></div>
+
+    <!-- Mountains background SVG -->
+    <div class="mountains">
+        <svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0,450 Q100,350 200,400 Q300,300 400,380 Q500,280 600,350 Q700,310 800,370 L800,600 L0,600Z" fill="currentColor"/>
+            <path d="M0,480 Q150,420 300,450 Q450,390 550,430 Q650,400 800,440 L800,600 L0,600Z" fill="currentColor" opacity="0.6"/>
+            <path d="M0,520 Q200,480 400,510 Q600,470 800,520 L800,600 L0,600Z" fill="currentColor" opacity="0.3"/>
+            <circle cx="680" cy="200" r="60" fill="currentColor" opacity="0.05"/>
+            <circle cx="150" cy="250" r="40" fill="currentColor" opacity="0.04"/>
+        </svg>
+    </div>
+
+    <!-- Floating petals -->
+    <div id="petals"></div>
 
     <div class="container">
         <!-- Hero -->
-        <header class="hero fade-in">
-            <div class="avatar">⚡</div>
+        <header class="hero">
+            <div class="fox">
+                <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Body -->
+                    <ellipse cx="60" cy="85" rx="28" ry="22" fill="#d4a574"/>
+                    <!-- Head -->
+                    <ellipse cx="60" cy="55" rx="24" ry="20" fill="#e8c99b"/>
+                    <!-- Left ear -->
+                    <polygon points="38,40 30,15 48,32" fill="#d4a574"/>
+                    <polygon points="39,37 34,22 46,33" fill="#f5d6c6"/>
+                    <!-- Right ear -->
+                    <polygon points="82,40 90,15 72,32" fill="#d4a574"/>
+                    <polygon points="81,37 86,22 74,33" fill="#f5d6c6"/>
+                    <!-- Eyes -->
+                    <ellipse cx="50" cy="52" rx="3.5" ry="4" fill="#2c2c2c"/>
+                    <ellipse cx="70" cy="52" rx="3.5" ry="4" fill="#2c2c2c"/>
+                    <circle cx="51" cy="50" r="1.2" fill="white"/>
+                    <circle cx="71" cy="50" r="1.2" fill="white"/>
+                    <!-- Nose -->
+                    <ellipse cx="60" cy="58" rx="3" ry="2" fill="#c04040"/>
+                    <!-- Mouth -->
+                    <path d="M55,61 Q60,65 65,61" fill="none" stroke="#2c2c2c" stroke-width="0.8"/>
+                    <!-- Blush -->
+                    <ellipse cx="46" cy="57" rx="4" ry="2.5" fill="#e8a0a0" opacity="0.5"/>
+                    <ellipse cx="74" cy="57" rx="4" ry="2.5" fill="#e8a0a0" opacity="0.5"/>
+                    <!-- Tail -->
+                    <path d="M85,80 Q105,65 95,45 Q92,38 90,42 Q88,55 82,70" fill="#d4a574" stroke="#c4a064" stroke-width="0.5"/>
+                    <path d="M85,80 Q105,65 95,45 Q92,38 90,42 Q88,55 82,70" fill="#f5d6c6" opacity="0.6"/>
+                </svg>
+            </div>
             <h1>黔中极客</h1>
-            <p class="tagline">
-                <span class="typewriter">QZGeek</span>
-            </p>
+            <p class="english">QZGeek</p>
+            <div class="divider"></div>
         </header>
 
         <!-- Poem -->
-        <div class="poem-card fade-in delay-1">
+        <div class="poem">
             <p>
                 初夏新叶替落红，春景不存。<br>
                 夕阳斜照城西楼，暮色迟留。
@@ -298,81 +286,60 @@
         </div>
 
         <!-- Links -->
-        <div class="links fade-in delay-2">
-            <a href="https://qzgeek.cn" class="btn web" target="_blank">🌐 qzgeek.cn</a>
-            <a href="https://github.com/qzgeek" class="btn gh" target="_blank">🐙 GitHub</a>
-            <a href="mailto:xcgeek@163.com" class="btn mail">📧 Email</a>
+        <div class="links">
+            <a href="https://qzgeek.cn">🌐 主页</a>
+            <a href="https://github.com/qzgeek">🐙 GitHub</a>
+            <a href="mailto:xcgeek@163.com">✉️ 邮件</a>
         </div>
 
-        <!-- About cards -->
-        <div class="section-title fade-in delay-2">
-            <span class="icon">👤</span> 关于我
-        </div>
-        <div class="about-grid fade-in delay-3">
-            <div class="about-item">
-                <span class="emoji">🎓</span>
-                <div class="label">身份</div>
-                <div class="value">在读学生</div>
+        <!-- About -->
+        <div class="section">
+            <div class="section-title">关于</div>
+            <div class="about-text">
+                <p>
+                    嗨，我是<span class="highlight">黔中极客</span>——
+                    一个热爱技术的在读学生，<br>
+                    也是开源社区的新人。
+                </p>
             </div>
-            <div class="about-item">
-                <span class="emoji">💻</span>
-                <div class="label">方向</div>
-                <div class="value">DevOps / 全栈</div>
-            </div>
-            <div class="about-item">
-                <span class="emoji">📍</span>
-                <div class="label">坐标</div>
-                <div class="value">中国 · 贵州</div>
-            </div>
-            <div class="about-item">
-                <span class="emoji">✍️</span>
-                <div class="label">爱好</div>
-                <div class="value">代码 · 诗词</div>
+            <div class="tag-row">
+                <span class="tag">📚 在读</span>
+                <span class="tag">💻 代码</span>
+                <span class="tag">🖋 诗词</span>
+                <span class="tag">☁️ 服务器</span>
+                <span class="tag">🏔 黔地</span>
             </div>
         </div>
 
-        <!-- Stats -->
-        <div class="section-title fade-in">
-            <span class="icon">📊</span> GitHub 统计
-        </div>
-        <div class="stats-row fade-in delay-1">
+        <!-- GitHub Stats -->
+        <div class="section">
+            <div class="section-title">统计</div>
             <div class="stats-card">
-                <img src="https://streak-stats.demolab.com?user=qzgeek&theme=tokyonight&hide_border=true&locale=zh&date_format=M%20j%5B%2C%20Y%5D" alt="连续提交" loading="lazy">
-            </div>
-            <div class="stats-card">
-                <img src="https://awesome-github-stats.azurewebsites.net/user-stats/qzgeek?cardType=level&theme=tokyonight&preferLogin=false" alt="等级统计" loading="lazy">
-            </div>
-        </div>
-        <div class="stats-row fade-in delay-2">
-            <div class="stats-card">
-                <img src="https://awesome-github-stats.azurewebsites.net/user-stats/qzgeek?cardType=octocat&theme=tokyonight&preferLogin=false" alt="章鱼猫" loading="lazy">
-            </div>
-            <div class="stats-card">
-                <img src="https://awesome-github-stats.azurewebsites.net/user-stats/qzgeek?cardType=github&theme=tokyonight&preferLogin=false" alt="统计" loading="lazy">
-            </div>
-        </div>
-        <div class="stats-card fade-in delay-3">
-            <img src="https://ghchart.rshah.org/qzgeek" alt="贡献热力图" loading="lazy">
-        </div>
-
-        <!-- Timeline -->
-        <div class="section-title fade-in">
-            <span class="icon">🗺</span> 旅程
-        </div>
-        <div class="timeline fade-in delay-1">
-            <div class="timeline-item">
-                <div class="date">2025</div>
-                <div class="content">开始探索开源世界，搭建个人服务器，创建 GitHub 账号</div>
-            </div>
-            <div class="timeline-item">
-                <div class="date">2026</div>
-                <div class="content">深入学习 DevOps，搭建个人主页，持续贡献开源项目</div>
+                <img src="https://awesome-github-stats.azurewebsites.net/user-stats/qzgeek?cardType=level&theme=tokyonight&preferLogin=false" alt="GitHub Stats" loading="lazy">
             </div>
         </div>
 
-        <footer class="fade-in">
-            <p>© 2025–2026 黔中极客 · Built with <span class="heart">❤️</span> on GitHub Pages</p>
+        <!-- Footer -->
+        <footer>
+            <div class="stamp">印</div>
+            <p>黔中极客 · 二〇二六</p>
         </footer>
     </div>
+
+    <script>
+    // Floating petals
+    const petals = ['🌸', '🍂', '🌺', '🍃', '✿'];
+    const container = document.getElementById('petals');
+    setInterval(() => {
+        const p = document.createElement('span');
+        p.className = 'petal';
+        p.textContent = petals[Math.floor(Math.random() * petals.length)];
+        p.style.left = Math.random() * 100 + '%';
+        p.style.animationDuration = (8 + Math.random() * 12) + 's';
+        p.style.animationDelay = '0s';
+        container.appendChild(p);
+        setTimeout(() => p.remove(), 20000);
+    }, 3000);
+    </script>
 </body>
 </html>
