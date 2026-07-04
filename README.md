@@ -33,7 +33,6 @@
 ### 📊 GitHub 统计
 
 <p align="center">
-  <a href="https://github.com/anuraghazra/github-readme-stats">
-    <img src="https://github-readme-stats-git-masterrstaa-rickstaa.vercel.app/api?username=qzgeek&show_icons=true&hide_title=true&count_private=true" alt="GitHub Stats">
-  </a>
+  <img src="https://github-profile-summary-cards.vercel.app/api/cards/stats?username=qzgeek&theme=default" alt="统计">
+  <img src="https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=qzgeek&theme=default" alt="语言">
 </p>
