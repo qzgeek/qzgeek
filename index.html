@@ -6,448 +6,240 @@
     <title>黔中極客 · QZGeek</title>
     <style>
         :root {
-            --paper: #e8ddc8;
-            --paper2: #e0d4bc;
-            --ink: #2a2218;
-            --fade-ink: #5a4e3c;
-            --red: #9b3030;
-            --border: #8a7b60;
+            --bg: #faf8f3;
+            --card: #f4f0e8;
+            --ink: #3a3632;
+            --muted: #8c867a;
+            --red: #b84c4c;
+            --gold: #b8945c;
+            --jade: #7a9e8a;
+            --line: #e0d9cb;
+            --light-line: #ebe4d4;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Noto Serif TC', 'Source Han Serif TC', 'MingLiU', 'PMingLiU', 'AR PL UMing TW', 'STSong', 'SimSun', serif;
-            background: #4a4234;
-            min-height: 100vh;
-            display: flex; align-items: center; justify-content: center;
-            padding: 2rem 1rem;
+            font-family: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: var(--bg);
+            color: var(--ink);
+            line-height: 1.8;
             -webkit-font-smoothing: antialiased;
-            /* Wooden desk texture */
-            background-image:
-                repeating-linear-gradient(0deg, transparent, transparent 1px, rgba(0,0,0,0.03) 2px),
-                radial-gradient(ellipse at 30% 50%, rgba(0,0,0,0.1) 0%, transparent 60%),
-                radial-gradient(ellipse at 70% 50%, rgba(0,0,0,0.08) 0%, transparent 60%);
         }
 
-        /* Open book - two pages */
-        .spread {
-            display: flex;
-            max-width: 900px; width: 100%;
-            background: var(--paper);
-            box-shadow:
-                3px 4px 20px rgba(0,0,0,0.4),
-                1px 1px 0 rgba(255,255,255,0.05) inset;
-            position: relative;
-            min-height: 520px;
-        }
-        /* Spine shadow */
-        .spread::before {
-            content: '';
-            position: absolute;
-            left: 50%; top: 0; bottom: 0;
-            width: 3px;
-            background: linear-gradient(90deg,
-                rgba(0,0,0,0.08), rgba(0,0,0,0.15) 40%,
-                transparent 50%,
-                rgba(0,0,0,0.15) 60%, rgba(0,0,0,0.08)
-            );
-            z-index: 2;
-            pointer-events: none;
-            transform: translateX(-50%);
-        }
-        /* Paper texture overlay */
-        .spread::after {
-            content: '';
-            position: absolute; inset: 0;
-            pointer-events: none; z-index: 1; opacity: 0.3;
-            background:
-                repeating-linear-gradient(90deg, transparent, transparent 1px, rgba(139,119,90,0.04) 2px),
-                repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(139,119,90,0.02) 4px);
+        /* Subtle ink texture overlay */
+        body::before {
+            content: ''; position: fixed; inset: 0;
+            pointer-events: none; z-index: 0; opacity: 0.015;
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
         }
 
-        /* Left page & Right page */
-        .page {
-            flex: 1;
-            position: relative;
-            padding: 2.5rem 2rem 2rem;
-            z-index: 1;
-        }
-        .page-left {
-            padding-left: 2.5rem;
-            padding-right: 1.5rem;
-        }
-        .page-right {
-            padding-left: 1.5rem;
-            padding-right: 2.5rem;
-        }
+        .container { max-width: 640px; margin: 0 auto; padding: 0 1.5rem; position: relative; z-index: 1; }
 
-        /* 版框 - border frame */
-        .page-frame {
-            position: absolute;
-            top: 1.2rem; bottom: 1.5rem;
-            left: 1.2rem; right: 1.2rem;
-            border: 1.5px solid var(--border);
-            pointer-events: none;
-            z-index: 0;
-        }
-        .page-left .page-frame { right: 0.8rem; }
-        .page-right .page-frame { left: 0.8rem; }
-        /* Inner rule */
-        .page-frame-inner {
-            position: absolute;
-            top: 1.4rem; bottom: 1.7rem;
-            left: 1.4rem; right: 1.4rem;
-            border: 0.5px solid rgba(138,123,96,0.4);
-            pointer-events: none;
-            z-index: 0;
-        }
-        .page-left .page-frame-inner { right: 1rem; }
-        .page-right .page-frame-inner { left: 1rem; }
-
-        /* Fish tail markers */
-        .fish-tail {
-            position: absolute;
-            left: 50%; transform: translateX(-50%);
-            pointer-events: none; z-index: 0;
-        }
-        .fish-tail-top {
-            top: 1.8rem;
-            width: 18px; height: 9px;
-        }
-        .fish-tail-bottom {
-            bottom: 2rem;
-            width: 18px; height: 9px;
-        }
-        .fish-tail svg { width: 100%; height: 100%; display: block; }
-
-        /* Left page stitching marks */
-        .stitching {
-            position: absolute; left: 0.6rem;
-            top: 4rem; bottom: 4rem;
-            display: flex; flex-direction: column;
-            gap: 3rem; align-items: center;
-            pointer-events: none; z-index: 2;
-        }
-        .stitching .hole {
-            width: 5px; height: 5px;
-            border-radius: 50%;
-            background: rgba(138,123,96,0.4);
-            box-shadow: 0 0 0 1px rgba(138,123,96,0.2);
-        }
-
-        /* Content */
-        .page-content {
-            position: relative; z-index: 1;
+        /* ── Hero ── */
+        .hero {
             text-align: center;
+            padding: 5rem 0 2rem;
         }
-        /* Right page: centered */
-        .page-left .page-content {
-            text-align: center;
-            height: 100%;
-            display: flex; flex-direction: column;
-            justify-content: center;
-            padding: 1rem 0;
-        }
-
-        .avatar-print {
+        .avatar-ring {
             display: inline-block;
-            margin-bottom: 1.2rem;
-        }
-        .avatar-print img {
-            width: 90px; height: 90px;
+            padding: 3px;
             border-radius: 50%;
-            filter: sepia(0.5) contrast(0.9) brightness(0.95);
-            border: 2px solid rgba(138,123,96,0.5);
+            background: linear-gradient(135deg, var(--jade), var(--gold));
+            margin-bottom: 1.5rem;
+        }
+        .avatar-ring img {
+            width: 108px; height: 108px;
+            border-radius: 50%; display: block;
+            border: 3px solid var(--bg);
+        }
+        .hero h1 {
+            font-size: 2.4rem; font-weight: 600;
+            letter-spacing: 0.12em;
+            font-family: 'Noto Serif SC', 'STSong', serif;
+        }
+        .hero .sub {
+            font-size: 0.88rem; color: var(--muted);
+            letter-spacing: 0.35em; margin-top: 0.3rem;
+            font-weight: 300;
         }
 
-        .name-block h1 {
-            font-size: 2rem; font-weight: 500;
-            letter-spacing: 0.25em;
-            color: var(--ink);
+        /* ── Poem ── */
+        .poem-strip {
+            text-align: center;
+            padding: 2rem 1rem; margin: 1.5rem 0 2.5rem;
+            border-top: 1px solid var(--line);
+            border-bottom: 1px solid var(--line);
         }
-        .name-block .eng {
-            font-size: 0.8rem; color: var(--fade-ink);
-            letter-spacing: 0.4em;
-            margin-top: 0.2rem;
+        .poem-strip p {
+            font-family: 'Noto Serif SC', 'STSong', serif;
+            font-size: 1.05rem; color: var(--muted);
+            line-height: 2.3; letter-spacing: 0.04em;
         }
-
-        /* Poem on right page in vertical columns */
-        .poem-vertical {
-            writing-mode: vertical-rl;
-            text-orientation: mixed;
-            text-align: start;
-            font-size: 1.1rem;
-            line-height: 2.2;
-            letter-spacing: 0.1em;
-            color: var(--ink);
-            height: 280px;
-            display: flex; gap: 1.8rem;
-            justify-content: center;
-            padding: 0.5rem 0;
-        }
-        .poem-vertical .column {
-            display: flex; flex-direction: column;
-            gap: 0.3rem;
-        }
-        .poem-vertical .char {
-            width: 1.5em;
-            height: 1.5em;
-            display: flex; align-items: center;
-            justify-content: center;
-        }
-        .poem-vertical .punct {
-            font-size: 0.85em;
-            color: var(--fade-ink);
+        .poem-strip .dot {
+            display: inline-block; width: 5px; height: 5px;
+            border-radius: 50%; background: var(--red);
+            margin: 1rem 0 0; opacity: 0.4;
         }
 
-        /* About on right page */
-        .about-text {
-            font-size: 0.85rem; color: var(--fade-ink);
-            line-height: 2.2; letter-spacing: 0.05em;
+        /* ── Links ── */
+        .link-bar {
+            display: flex; gap: 0.8rem; justify-content: center;
+            flex-wrap: wrap; margin: 0 0 3rem;
         }
-        .about-text strong { color: var(--ink); font-weight: 500; }
-
-        /* Links on right page */
-        .link-row {
-            display: flex; gap: 0.6rem; justify-content: center;
-            flex-wrap: wrap; margin: 1rem 0;
-        }
-        .link-row a {
-            padding: 0.2rem 1rem;
-            border: 1px solid var(--border);
+        .link-bar a {
+            padding: 0.45rem 1.4rem;
+            border: 1px solid var(--line);
+            border-radius: 20px;
             text-decoration: none; color: var(--ink);
-            font-size: 0.78rem; letter-spacing: 0.08em;
+            font-size: 0.85rem; letter-spacing: 0.04em;
             transition: all 0.3s;
+            font-weight: 400;
         }
-        .link-row a:hover { border-color: var(--red); color: var(--red); }
-
-        /* Stats card on left page */
-        .stats-card {
-            text-align: center;
-            background: rgba(0,0,0,0.03);
-            padding: 0.8rem;
-            margin: 1rem auto 0;
-            max-width: 95%;
-        }
-        .stats-card img { max-width: 100%; height: auto; }
-
-        /* 印章 */
-        .seal {
-            display: inline-block;
-            width: 36px; height: 36px;
-            border: 1.5px solid var(--red);
+        .link-bar a:hover {
+            border-color: var(--red);
             color: var(--red);
-            font-size: 0.7rem;
-            line-height: 34px;
+            background: rgba(184,76,76,0.03);
+        }
+
+        /* ── Section ── */
+        .section { margin: 2.5rem 0; }
+        .section-head {
             text-align: center;
-            margin-top: 0.8rem;
+            font-size: 0.78rem; color: var(--gold);
+            letter-spacing: 0.2em;
+            margin-bottom: 1.5rem;
+            font-weight: 400;
         }
 
-        /* Page number - 版心 */
-        .page-num {
-            position: absolute; left: 50%;
-            transform: translateX(-50%);
-            font-size: 0.65rem; color: var(--border);
-            pointer-events: none; z-index: 0;
+        /* ── About ── */
+        .about-card {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 2rem 1.5rem; text-align: center;
+            max-width: 400px; margin: 0 auto;
         }
-        .page-num-bottom { bottom: 0.6rem; }
+        .about-card p { font-size: 0.9rem; color: var(--muted); line-height: 2; }
+        .about-card strong { color: var(--ink); font-weight: 600; }
 
-        /* ===== RESPONSIVE ===== */
-
-        /* Tablet / small landscape */
-        @media (max-width: 800px) and (min-width: 701px) {
-            .spread { max-width: 95vw; }
-            .page { padding: 2rem 1.2rem; }
-            .avatar-print img { width: 72px; height: 72px; }
-            .name-block h1 { font-size: 1.6rem; }
-            .poem-vertical { font-size: 0.95rem; gap: 1rem; height: 260px; }
+        .tag-cloud {
+            display: flex; gap: 0.5rem; justify-content: center;
+            flex-wrap: wrap; margin-top: 1rem;
         }
-
-        /* Phone portrait — scroll-like stacked pages */
-        @media (max-width: 700px), (orientation: portrait) and (max-width: 900px) {
-            body {
-                padding: 1rem 0.5rem;
-                align-items: flex-start;
-            }
-            .spread {
-                flex-direction: column;
-                max-width: 420px;
-                width: 100%;
-            }
-            /* Spine → horizontal divider line */
-            .spread::before {
-                left: 10%; right: 10%; top: auto; bottom: auto;
-                width: auto; height: 1px;
-                background: linear-gradient(90deg, transparent, rgba(138,123,96,0.4) 30%, rgba(138,123,96,0.6) 50%, rgba(138,123,96,0.4) 70%, transparent);
-                transform: none;
-            }
-            .page-left, .page-right {
-                padding: 2rem 1.5rem 1.5rem;
-            }
-            .page-left { order: 1; }
-            .page-right { order: 2; }
-            /* Adjust frames */
-            .page-frame { top: 0.8rem; bottom: 1rem; left: 0.8rem; right: 0.8rem; }
-            .page-left .page-frame { right: 0.8rem; }
-            .page-frame-inner { top: 1rem; bottom: 1.2rem; left: 1rem; right: 1rem; }
-            .page-left .page-frame-inner { right: 1rem; }
-            .page-right .page-frame-inner { left: 1rem; }
-            /* Stitching on top page only */
-            .page-left .stitching { left: 0.4rem; gap: 5rem; top: 2rem; bottom: 2rem; }
-            .stitching .hole { width: 4px; height: 4px; }
-            /* Fish tails */
-            .fish-tail-top { top: 1.2rem; }
-            .fish-tail-bottom { bottom: 1.2rem; }
-            /* Scaled content */
-            .avatar-print img { width: 72px; height: 72px; }
-            .name-block h1 { font-size: 1.8rem; }
-            .poem-vertical {
-                height: auto; min-height: 160px;
-                font-size: 0.9rem; gap: 1rem;
-                writing-mode: vertical-rl;
-                overflow-x: auto;
-                justify-content: center;
-            }
-            .about-text { font-size: 0.8rem; }
-            .link-row a { font-size: 0.75rem; padding: 0.15rem 0.8rem; }
-            .stats-card { padding: 0.5rem; }
-            .page-num-bottom { bottom: 0.3rem; font-size: 0.6rem; }
+        .tag-cloud span {
+            font-size: 0.75rem; color: var(--muted);
+            padding: 0.2rem 0.8rem;
+            border: 1px solid var(--light-line);
+            border-radius: 12px;
         }
 
-        /* Very small phones */
-        @media (max-width: 380px) {
-            .spread { max-width: 100%; }
-            .page-left, .page-right { padding: 1.5rem 1rem 1rem; }
-            .page-frame { top: 0.5rem; bottom: 0.7rem; left: 0.5rem; right: 0.5rem; }
-            .page-frame-inner { top: 0.7rem; bottom: 0.9rem; left: 0.7rem; right: 0.7rem; }
-            .name-block h1 { font-size: 1.5rem; }
-            .avatar-print img { width: 60px; height: 60px; }
-            .poem-vertical { font-size: 0.8rem; gap: 0.6rem; min-height: 130px; }
-            .stats-card img { max-width: 100%; }
-            .page-num-bottom { display: none; }
+        /* ── Stats ── */
+        .stats-card {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 1.5rem; text-align: center;
+            max-width: 480px; margin: 0 auto;
+        }
+        .stats-card img { max-width: 100%; height: auto; border-radius: 8px; }
+
+        /* ── Footer ── */
+        footer {
+            text-align: center; padding: 3rem 1rem 2rem;
+            color: var(--muted); font-size: 0.78rem;
+            letter-spacing: 0.08em; font-weight: 300;
+        }
+        footer .mark {
+            display: inline-block; width: 8px; height: 8px;
+            border-radius: 50%; background: var(--red);
+            opacity: 0.3; margin-bottom: 0.5rem;
+        }
+
+        /* ── Ink branch decoration ── */
+        .ink-branch {
+            position: fixed; pointer-events: none; z-index: 0; opacity: 0.04;
+        }
+        .ink-branch.top-right { top: -20px; right: -40px; width: 260px; height: 200px; }
+        .ink-branch.bottom-left { bottom: -30px; left: -20px; width: 200px; height: 160px; }
+
+        /* ── Responsive ── */
+        @media (max-width: 500px) {
+            .hero { padding: 3rem 0 1.5rem; }
+            .hero h1 { font-size: 1.8rem; }
+            .avatar-ring img { width: 84px; height: 84px; }
+            .poem-strip p { font-size: 0.95rem; }
+            .about-card, .stats-card { padding: 1.2rem 1rem; }
         }
     </style>
 </head>
 <body>
-    <div class="spread">
-        <!-- LEFT PAGE (封面 / 统计) -->
-        <div class="page page-left">
-            <div class="page-frame"></div>
-            <div class="page-frame-inner"></div>
-            <!-- Fish tail top -->
-            <div class="fish-tail fish-tail-top">
-                <svg viewBox="0 0 18 9">
-                    <path d="M9,0 L18,9 L9,5 L0,9Z" fill="none" stroke="rgba(138,123,96,0.5)" stroke-width="0.6"/>
-                </svg>
-            </div>
-            <!-- Fish tail bottom -->
-            <div class="fish-tail fish-tail-bottom">
-                <svg viewBox="0 0 18 9">
-                    <path d="M9,9 L18,0 L9,4 L0,0Z" fill="none" stroke="rgba(138,123,96,0.5)" stroke-width="0.6"/>
-                </svg>
-            </div>
-            <!-- Stitching -->
-            <div class="stitching">
-                <div class="hole"></div><div class="hole"></div><div class="hole"></div>
-            </div>
-            <div class="page-num page-num-bottom">一</div>
+    <!-- Ink branch decorations -->
+    <svg class="ink-branch top-right" viewBox="0 0 260 200" xmlns="http://www.w3.org/2000/svg">
+        <path d="M200,180 Q180,140 190,100 Q200,60 170,30 Q150,10 140,0" fill="none" stroke="#3a3632" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M190,100 Q160,80 140,70" fill="none" stroke="#3a3632" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M180,130 Q150,120 130,125" fill="none" stroke="#3a3632" stroke-width="1.2" stroke-linecap="round"/>
+        <circle cx="140" cy="0" r="4" fill="#3a3632"/>
+        <circle cx="138" cy="-5" r="3" fill="#3a3632" opacity="0.6"/>
+        <circle cx="143" cy="-9" r="2" fill="#3a3632" opacity="0.3"/>
+    </svg>
+    <svg class="ink-branch bottom-left" viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20,0 Q40,40 30,80 Q20,110 40,140 Q50,155 60,160" fill="none" stroke="#3a3632" stroke-width="2" stroke-linecap="round"/>
+        <path d="M30,80 Q60,65 75,55" fill="none" stroke="#3a3632" stroke-width="1.2" stroke-linecap="round"/>
+        <line x1="65" y1="56" x2="62" y2="48" stroke="#3a3632" stroke-width="1" stroke-linecap="round"/>
+        <line x1="72" y1="55" x2="74" y2="47" stroke="#3a3632" stroke-width="0.8" stroke-linecap="round"/>
+    </svg>
 
-            <div class="page-content">
-                <!-- Avatar as woodblock print style -->
-                <div class="avatar-print">
-                    <img src="https://avatars.githubusercontent.com/u/160110426?v=4" alt="QZGeek">
+    <div class="container">
+        <!-- Hero -->
+        <header class="hero">
+            <div class="avatar-ring">
+                <img src="https://avatars.githubusercontent.com/u/160110426?v=4" alt="QZGeek">
+            </div>
+            <h1>黔中極客</h1>
+            <p class="sub">QZGeek</p>
+        </header>
+
+        <!-- Poem -->
+        <div class="poem-strip">
+            <p>
+                初夏新葉替落紅，春景不存。<br>
+                夕陽斜照城西樓，暮色遲留。
+            </p>
+            <div class="dot"></div>
+        </div>
+
+        <!-- Links -->
+        <div class="link-bar">
+            <a href="https://www.qzgeek.cn">📝 博客</a>
+            <a href="https://github.com/qzgeek">🐙 GitHub</a>
+            <a href="mailto:xcgeek@163.com">✉️ 郵件</a>
+        </div>
+
+        <!-- About -->
+        <div class="section">
+            <div class="section-head">關 於</div>
+            <div class="about-card">
+                <p>嗨，我是<strong>黔中極客</strong></p>
+                <p>熱愛技術的在讀學生，開源社區的新人</p>
+                <div class="tag-cloud">
+                    <span>💻 代碼</span>
+                    <span>☁️ 服務器</span>
+                    <span>🖋 詩詞</span>
+                    <span>🏔 黔地</span>
                 </div>
-                <div class="name-block">
-                    <h1>黔中極客</h1>
-                    <p class="eng">QZGeek</p>
-                </div>
-                <div class="seal" style="margin-top:1.5rem;">黔</div>
             </div>
         </div>
 
-        <!-- RIGHT PAGE (内容) -->
-        <div class="page page-right">
-            <div class="page-frame"></div>
-            <div class="page-frame-inner"></div>
-            <div class="fish-tail fish-tail-top">
-                <svg viewBox="0 0 18 9">
-                    <path d="M9,0 L18,9 L9,5 L0,9Z" fill="none" stroke="rgba(138,123,96,0.5)" stroke-width="0.6"/>
-                </svg>
-            </div>
-            <div class="fish-tail fish-tail-bottom">
-                <svg viewBox="0 0 18 9">
-                    <path d="M9,9 L18,0 L9,4 L0,0Z" fill="none" stroke="rgba(138,123,96,0.5)" stroke-width="0.6"/>
-                </svg>
-            </div>
-            <div class="page-num page-num-bottom">二</div>
-
-            <div class="page-content">
-                <!-- Vertical poem -->
-                <div class="poem-vertical">
-                    <div class="column">
-                        <span class="char">夏</span>
-                        <span class="char">景</span>
-                        <span class="char">不</span>
-                        <span class="char">存</span>
-                        <span class="char punct">。</span>
-                    </div>
-                    <div class="column">
-                        <span class="char">葉</span>
-                        <span class="char">替</span>
-                        <span class="char">落</span>
-                        <span class="char">紅</span>
-                        <span class="char">，</span>
-                    </div>
-                    <div class="column">
-                        <span class="char">初</span>
-                        <span class="char">夏</span>
-                        <span class="char">新</span>
-                        <span class="char" style="visibility:hidden">　</span>
-                        <span class="char" style="visibility:hidden">　</span>
-                    </div>
-                    <div class="column" style="margin-left:0.8rem;">
-                        <span class="char">暮</span>
-                        <span class="char">色</span>
-                        <span class="char">遲</span>
-                        <span class="char">留</span>
-                        <span class="char punct">。</span>
-                    </div>
-                    <div class="column">
-                        <span class="char">城</span>
-                        <span class="char">西</span>
-                        <span class="char">樓</span>
-                        <span class="char">，</span>
-                        <span class="char" style="visibility:hidden">　</span>
-                    </div>
-                    <div class="column">
-                        <span class="char">夕</span>
-                        <span class="char">陽</span>
-                        <span class="char">斜</span>
-                        <span class="char">照</span>
-                        <span class="char" style="visibility:hidden">　</span>
-                    </div>
-                </div>
-
-                <!-- About text -->
-                <div class="about-text" style="margin-top:1rem;">
-                    <p>嗨，我是<strong>黔中極客</strong></p>
-                    <p style="font-size:0.8rem; margin-top:0.3rem;">熱愛技術的在讀學生 · 開源新人</p>
-                    <p style="font-size:0.75rem;">💻 代碼 · ☁️ 服務器 · 🖋 詩詞</p>
-                </div>
-
-                <!-- Links -->
-                <div class="link-row">
-                    <a href="https://www.qzgeek.cn">📝 博客</a>
-                    <a href="https://github.com/qzgeek">🐙 GitHub</a>
-                    <a href="mailto:xcgeek@163.com">✉️ 郵件</a>
-                </div>
-
-                <!-- Stats as appendix -->
-                <div class="stats-card">
-                    <img src="https://awesome-github-stats.azurewebsites.net/user-stats/qzgeek?cardType=level&theme=tokyonight&preferLogin=false" alt="GitHub" loading="lazy" style="filter:sepia(0.2);">
-                </div>
+        <!-- Stats -->
+        <div class="section">
+            <div class="section-head">統 計</div>
+            <div class="stats-card">
+                <img src="https://awesome-github-stats.azurewebsites.net/user-stats/qzgeek?cardType=level&theme=tokyonight&preferLogin=false" alt="GitHub" loading="lazy">
             </div>
         </div>
+
+        <footer>
+            <div class="mark"></div>
+            <p>© 二〇二六 黔中極客</p>
+        </footer>
     </div>
 </body>
 </html>
