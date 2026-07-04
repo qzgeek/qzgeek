@@ -48,15 +48,6 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/qzgeek">
-    <img height="160em" src="https://awesome-github-stats.azurewebsites.net/user-stats/qzgeek?cardType=octocat&theme=tokyonight&preferLogin=false" alt="章鱼猫统计" />
-  </a>
-  <a href="https://github.com/qzgeek">
-    <img height="160em" src="https://awesome-github-stats.azurewebsites.net/user-stats/qzgeek?cardType=github&theme=tokyonight&preferLogin=false" alt="GitHub 统计" />
-  </a>
-</p>
-
-<p align="center">
   <img src="https://ghchart.rshah.org/qzgeek" alt="贡献热力图" />
 </p>
 
