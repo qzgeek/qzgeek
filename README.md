@@ -33,6 +33,15 @@
 ### 📊 GitHub 统计
 
 <p align="center">
-  <img src="https://github-profile-summary-cards.vercel.app/api/cards/stats?username=qzgeek&theme=default" alt="统计">
-  <img src="https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=qzgeek&theme=default" alt="语言">
+  <a href="https://github.com/qzgeek">
+    <img height="160em" src="https://streak-stats.demolab.com?user=qzgeek&theme=tokyonight&hide_border=true&locale=zh" alt="连续提交统计" />
+  </a>
 </p>
+
+<p align="center">
+  <img src="https://ghchart.rshah.org/qzgeek" alt="贡献热力图" />
+</p>
+
+---
+
+<sub>📬 联系我: [xcgeek@163.com](mailto:xcgeek@163.com) | 🌐 [qzgeek.cn](https://qzgeek.cn)</sub>
