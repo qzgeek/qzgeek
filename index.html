@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>黔中極客 · QZGeek</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@latest/style.css">
     <style>
         :root {
             --bg: #faf8f3;
@@ -43,14 +42,14 @@
         /* ── Hero ── */
         .hero {
             text-align: center;
-            padding: 5rem 0 2rem;
+            padding: 3rem 0 1rem;
         }
         .avatar-ring {
             display: inline-block;
             padding: 4px;
             border-radius: 50%;
             background: linear-gradient(135deg, var(--jade), var(--gold));
-            margin-bottom: 2rem;
+            margin-bottom: 1.2rem;
         }
         .avatar-ring img {
             width: 130px; height: 130px;
@@ -71,10 +70,9 @@
         /* ── Poem ── */
         .poem-strip {
             text-align: center;
-            padding: 2.5rem 1rem; margin: 2rem 0 3rem;
+            padding: 1.5rem 1rem; margin: 1rem 0 2rem;
             border-top: 1px solid var(--line);
             border-bottom: 1px solid var(--line);
-            position: relative;
         }
         .poem-strip p {
             font-family: 'LXGW WenKai', 'Noto Serif SC', 'STSong', serif;
@@ -101,6 +99,10 @@
             transition: all 0.3s;
             font-weight: 400;
         }
+        .link-bar {
+            display: flex; gap: 0.8rem; justify-content: center;
+            flex-wrap: wrap; margin: 0 0 1.5rem;
+        }
         .link-bar a:hover {
             border-color: var(--red); color: var(--red);
             background: rgba(184,76,76,0.03);
@@ -110,7 +112,7 @@
         .divider {
             display: flex; align-items: center;
             justify-content: center; gap: 1rem;
-            margin: 2.5rem 0; opacity: 0.5;
+            margin: 1.5rem 0; opacity: 0.5;
         }
         .divider::before, .divider::after {
             content: ''; flex: 1; max-width: 60px;
@@ -122,14 +124,14 @@
         .section-head {
             text-align: center;
             font-size: 0.9rem; color: var(--gold);
-            letter-spacing: 0.2em; margin-bottom: 1.4rem;
+            letter-spacing: 0.2em; margin-bottom: 1rem;
             font-weight: 400;
         }
 
         /* ── Project cards ── */
         .project-card {
             background: var(--card); border-radius: 14px;
-            padding: 1.4rem 1.6rem; margin: 0.8rem 0;
+            padding: 1rem 1.4rem; margin: 0.5rem 0;
             display: flex; align-items: center; gap: 1.2rem;
             transition: all 0.25s; border: 1px solid transparent;
         }
@@ -165,13 +167,13 @@
         /* ── Stats ── */
         .stats-card {
             background: var(--card); border-radius: 14px;
-            padding: 1.8rem; text-align: center;
+            padding: 1.2rem; text-align: center;
             max-width: 480px; margin: 0 auto;
         }
 
         /* ── Footer ── */
         footer {
-            text-align: center; padding: 4rem 1rem 3rem;
+            text-align: center; padding: 2.5rem 1rem 2rem;
             color: var(--muted); font-size: 0.85rem;
             letter-spacing: 0.08em; font-weight: 300;
             line-height: 2;
