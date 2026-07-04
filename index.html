@@ -1,269 +1,316 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>黔中极客 · QZGeek</title>
+    <title>黔中極客 · QZGeek</title>
     <style>
         :root {
-            --ink: #333;
-            --paper: #faf7f2;
-            --soft-paper: #f3efe8;
-            --vermillion: #b84040;
-            --gold: #b8944e;
-            --jade: #6b9e7a;
-            --mist: #c5bfb0;
-            --light: #8a8a80;
+            --paper: #f4edda;
+            --paper-dark: #ece3cc;
+            --ink: #3a3226;
+            --light-ink: #6b6050;
+            --red: #b84040;
+            --gold: #a08050;
+            --border: #c8b898;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Noto Serif SC', 'STSong', 'Songti SC', 'SimSun', serif;
-            background: var(--paper);
+            font-family: 'Noto Serif TC', 'Source Han Serif TC', 'MingLiU', 'PMingLiU', 'STSong', 'SimSun', 'AR PL UMing CN', '宋体', serif;
+            background: #d9d0b8;
+            background-image:
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(139,119,90,0.03) 3px);
             color: var(--ink);
             min-height: 100vh;
-            line-height: 1.8;
+            line-height: 2;
+            display: flex;
+            justify-content: center;
+            padding: 0;
             -webkit-font-smoothing: antialiased;
         }
 
-        /* Ink mountain background */
-        .bg-mountains {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        /* Book container */
+        .book {
+            max-width: 580px;
+            width: 100%;
+            margin: 2rem 1rem;
+            background: var(--paper);
+            box-shadow:
+                2px 3px 10px rgba(0,0,0,0.12),
+                inset 0 0 60px rgba(139,119,90,0.06);
+            position: relative;
+            padding: 3rem 2.5rem 2.5rem;
+        }
+        /* Double border - classic thread-bound book style */
+        .book::before {
+            content: '';
+            position: absolute;
+            top: 1rem; left: 1rem; right: 1rem; bottom: 1.2rem;
+            border: 1px solid var(--border);
+            pointer-events: none;
+        }
+        .book::after {
+            content: '';
+            position: absolute;
+            top: 1.3rem; left: 1.3rem; right: 1.3rem; bottom: 1.5rem;
+            border: 0.5px solid rgba(200,184,152,0.5);
+            pointer-events: none;
+        }
+
+        /* Stitching dots on left side */
+        .stitches {
+            position: absolute; left: 0.5rem; top: 5rem; bottom: 4rem;
+            width: 6px;
+            display: flex; flex-direction: column; gap: 2.5rem;
+            align-items: center;
+            pointer-events: none; z-index: 2;
+        }
+        .stitches span {
+            width: 4px; height: 4px;
+            background: var(--border);
+            border-radius: 50%;
+        }
+
+        .book-inner { position: relative; z-index: 1; text-align: center; }
+
+        /* Central column (版心) */
+        .center-column {
+            position: absolute; left: 50%; top: 2rem; bottom: 2rem;
+            width: 0; pointer-events: none; z-index: 0;
+        }
+        .center-column::before {
+            content: '';
+            position: absolute; left: 50%; top: 0; bottom: 0;
+            width: 1px; background: rgba(200,184,152,0.4);
+            transform: translateX(-50%);
+        }
+        /* Fish-tail markers */
+        .fish-tail-top, .fish-tail-bottom {
+            position: absolute; left: 50%; transform: translateX(-50%);
+            width: 16px; height: 8px;
             pointer-events: none; z-index: 0;
-            background:
-                radial-gradient(ellipse 60% 50% at 50% 100%, rgba(107,158,122,0.04) 0%, transparent 60%),
-                radial-gradient(ellipse 40% 30% at 20% 20%, rgba(184,148,78,0.03) 0%, transparent 50%);
         }
-
-        /* Horizontal rule pattern */
-        .bg-lines {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none; z-index: 0; opacity: 0.02;
-            background: repeating-linear-gradient(
-                0deg, transparent, transparent 39px, var(--ink) 40px
-            );
+        .fish-tail-top {
+            top: 1.8rem;
+            background: linear-gradient(180deg, transparent 40%, var(--border) 40%, var(--border) 60%, transparent 60%);
+            border-radius: 0 0 50% 50%;
         }
-
-        .container { max-width: 600px; margin: 0 auto; padding: 0 1.5rem; position: relative; z-index: 1; }
+        .fish-tail-bottom {
+            bottom: 1.8rem;
+            background: linear-gradient(0deg, transparent 40%, var(--border) 40%, var(--border) 60%, transparent 60%);
+            border-radius: 50% 50% 0 0;
+        }
 
         /* Hero */
-        .hero {
-            text-align: center;
-            padding: 4rem 0 2rem;
-        }
-        .avatar-wrap {
+        .hero { padding: 1rem 0 1.5rem; }
+        .avatar-frame {
             display: inline-block;
-            padding: 4px;
+            padding: 6px;
+            background: var(--paper);
+            border: 2px solid var(--border);
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--mist), var(--gold), var(--jade));
-            margin-bottom: 1.5rem;
-            animation: gentlePulse 4s ease-in-out infinite;
+            margin-bottom: 1.8rem;
+            box-shadow: 0 0 0 1px rgba(200,184,152,0.3);
         }
-        @keyframes gentlePulse {
-            0%, 100% { box-shadow: 0 0 0 0 rgba(184,148,78,0.15); }
-            50% { box-shadow: 0 0 0 12px rgba(184,148,78,0); }
-        }
-        .hero .avatar {
-            width: 96px; height: 96px;
+        .avatar-frame img {
+            width: 120px; height: 120px;
             border-radius: 50%;
             display: block;
-            border: 3px solid var(--paper);
+            border: 2px solid var(--paper-dark);
         }
         .hero h1 {
-            font-size: 2.4rem; font-weight: 400;
-            margin: 0.8rem 0 0.3rem;
-            letter-spacing: 0.18em;
+            font-size: 2.6rem; font-weight: 500;
+            letter-spacing: 0.2em;
         }
-        .hero .sub {
-            font-size: 0.9rem; color: var(--light);
-            letter-spacing: 0.35em;
+        .hero .eng {
+            font-size: 0.85rem; color: var(--light-ink);
+            letter-spacing: 0.4em;
+            font-style: italic;
+            margin-top: 0.3rem;
         }
-        .hero .ornament {
-            display: flex; align-items: center; justify-content: center;
-            gap: 1rem; margin: 1.2rem 0;
-            color: var(--vermillion); font-size: 0.6rem;
+        /* 界行 — chapter divider */
+        .chapter-mark {
+            display: flex; align-items: center;
+            justify-content: center; gap: 0.6rem;
+            margin: 1.2rem 0;
+            font-size: 0.65rem; color: var(--red);
         }
-        .hero .ornament::before, .hero .ornament::after {
-            content: ''; width: 30px; height: 1px;
-            background: linear-gradient(90deg, transparent, var(--vermillion));
-        }
-        .hero .ornament::after {
-            background: linear-gradient(90deg, var(--vermillion), transparent);
+        .chapter-mark::before, .chapter-mark::after {
+            content: ''; width: 28px; height: 1px;
+            background: var(--red); opacity: 0.4;
         }
 
         /* Poem */
-        .poem-block {
-            text-align: center; padding: 1.8rem 1rem; margin: 1rem 0 2.5rem;
-            position: relative;
+        .poem-box {
+            text-align: center; padding: 1.5rem 0.5rem;
+            margin: 0.5rem 0 2rem;
         }
-        .poem-block p {
-            font-size: 1rem; color: var(--light);
-            line-height: 2.4; letter-spacing: 0.05em;
+        .poem-box p {
+            font-size: 1.05rem; color: var(--light-ink);
+            line-height: 2.5; letter-spacing: 0.06em;
         }
-        .poem-block .seal {
-            color: var(--vermillion); font-size: 0.75rem;
-            margin-top: 0.8rem; opacity: 0.5;
+        .poem-box .verses {
+            display: inline-block; text-align: left;
         }
 
-        /* Links row */
-        .links {
-            display: flex; gap: 0.8rem; justify-content: center;
-            flex-wrap: wrap; margin: 0 0 3rem;
+        /* Links */
+        .link-bar {
+            display: flex; gap: 1rem; justify-content: center;
+            flex-wrap: wrap; margin: 0 0 2.5rem;
         }
-        .links a {
-            padding: 0.4rem 1.4rem;
-            border: 1px solid var(--mist);
+        .link-bar a {
+            padding: 0.3rem 1.2rem;
+            border: 1px solid var(--border);
             text-decoration: none; color: var(--ink);
-            font-size: 0.85rem; letter-spacing: 0.05em;
-            transition: all 0.35s;
+            font-size: 0.82rem; letter-spacing: 0.06em;
+            transition: all 0.3s;
         }
-        .links a:hover {
-            border-color: var(--vermillion);
-            color: var(--vermillion);
-            background: rgba(184,64,64,0.03);
-        }
-
-        /* Section */
-        .section { margin: 2.5rem 0; }
-        .section-label {
-            text-align: center;
-            font-size: 0.8rem; color: var(--gold);
-            letter-spacing: 0.2em;
-            margin-bottom: 1.5rem;
-            display: flex; align-items: center; justify-content: center; gap: 0.6rem;
-        }
-        .section-label::before, .section-label::after {
-            content: '·'; font-size: 1.2rem; line-height: 1;
+        .link-bar a:hover {
+            border-color: var(--red);
+            color: var(--red);
         }
 
-        /* About */
-        .about-card {
-            text-align: center; max-width: 380px; margin: 0 auto;
-            padding: 1.5rem;
-            background: var(--soft-paper);
-            border-radius: 2px;
-            font-size: 0.9rem; color: var(--light);
-            line-height: 2;
+        /* Section headings */
+        .section-head {
+            text-align: center; margin: 2rem 0 1.2rem;
+            font-size: 0.78rem; color: var(--gold);
+            letter-spacing: 0.25em;
+            display: flex; align-items: center;
+            justify-content: center; gap: 0.5rem;
         }
-        .about-card strong { color: var(--ink); font-weight: 500; }
+        .section-head span {
+            display: inline-block; width: 20px;
+            border-top: 1px solid var(--border);
+        }
+
+        /* About card */
+        .about {
+            text-align: center; padding: 1.2rem;
+            background: var(--paper-dark);
+            margin: 0 auto; max-width: 360px;
+            font-size: 0.88rem; color: var(--light-ink);
+            line-height: 2.2;
+        }
+        .about strong { color: var(--ink); font-weight: 500; }
 
         /* Stats */
-        .stats-wrap {
+        .stats {
             text-align: center; padding: 1rem;
-            background: var(--soft-paper); border-radius: 2px;
-            max-width: 480px; margin: 0 auto;
+            background: var(--paper-dark);
+            margin: 0 auto; max-width: 460px;
         }
-        .stats-wrap img { max-width: 100%; height: auto; border-radius: 2px; }
+        .stats img { max-width: 100%; height: auto; }
 
-        /* Footer */
-        footer {
-            text-align: center; padding: 3rem 1rem 2rem;
-            color: var(--mist); font-size: 0.75rem;
-            letter-spacing: 0.1em;
+        /* Colophon */
+        .colophon {
+            text-align: center; padding: 2.5rem 0 1rem;
+            font-size: 0.72rem; color: var(--light-ink);
+            letter-spacing: 0.1em; line-height: 2;
         }
-        footer .chop {
-            display: inline-block; width: 32px; height: 32px;
-            border: 1.5px solid var(--vermillion);
-            color: var(--vermillion);
-            line-height: 30px; font-size: 0.65rem;
-            margin-bottom: 0.6rem; opacity: 0.5;
+        .colophon .chop {
+            display: inline-block; width: 34px; height: 34px;
+            border: 1.5px solid var(--red);
+            color: var(--red); line-height: 32px;
+            font-size: 0.65rem; margin-bottom: 0.4rem;
+        }
+        .colophon .era {
+            color: var(--gold); font-size: 0.68rem;
         }
 
-        /* Floating leaves */
-        .leaf {
-            position: fixed; pointer-events: none; z-index: 0;
-            animation: leafFall linear forwards;
-            opacity: 0.08; font-size: 1.4rem;
+        /* Tea stains */
+        .stain {
+            position: absolute; pointer-events: none; z-index: 0;
+            border-radius: 50%; opacity: 0.04;
+            background: radial-gradient(circle, #8b775a 0%, transparent 70%);
         }
-        @keyframes leafFall {
-            0% { transform: translateY(-5vh) rotate(0deg); opacity: 0; }
-            15% { opacity: 0.1; }
-            85% { opacity: 0.08; }
-            100% { transform: translateY(105vh) rotate(720deg); opacity: 0; }
-        }
+        .stain-1 { width: 60px; height: 60px; top: 15%; right: 8%; }
+        .stain-2 { width: 40px; height: 40px; bottom: 20%; left: 10%; }
 
         @media (max-width: 500px) {
-            .hero h1 { font-size: 1.8rem; }
-            .hero .avatar { width: 76px; height: 76px; }
-            .hero { padding: 2.5rem 0 1.5rem; }
+            .book { margin: 0.5rem; padding: 2rem 1.2rem 1.5rem; }
+            .book::before { top: 0.5rem; left: 0.5rem; right: 0.5rem; bottom: 0.6rem; }
+            .book::after { top: 0.7rem; left: 0.7rem; right: 0.7rem; bottom: 0.9rem; }
+            .hero h1 { font-size: 2rem; }
+            .avatar-frame img { width: 96px; height: 96px; }
+            .stitches { display: none; }
         }
     </style>
 </head>
 <body>
-    <div class="bg-mountains"></div>
-    <div class="bg-lines"></div>
-    <div id="leaves"></div>
+    <div class="book">
+        <!-- Stitching -->
+        <div class="stitches">
+            <span></span><span></span><span></span><span></span><span></span>
+        </div>
 
-    <div class="container">
-        <!-- Hero - centered on GitHub avatar -->
-        <header class="hero">
-            <div class="avatar-wrap">
-                <img class="avatar" src="https://avatars.githubusercontent.com/u/160110426?v=4" alt="QZGeek">
+        <!-- Tea stains -->
+        <div class="stain stain-1"></div>
+        <div class="stain stain-2"></div>
+
+        <!-- Central column markers -->
+        <div class="center-column"></div>
+        <div class="fish-tail-top"></div>
+        <div class="fish-tail-bottom"></div>
+
+        <div class="book-inner">
+            <!-- Hero -->
+            <header class="hero">
+                <div class="avatar-frame">
+                    <img src="https://avatars.githubusercontent.com/u/160110426?v=4" alt="QZGeek">
+                </div>
+                <h1>黔中極客</h1>
+                <p class="eng">QZGeek</p>
+                <div class="chapter-mark">◆</div>
+            </header>
+
+            <!-- Poem -->
+            <div class="poem-box">
+                <div class="verses">
+                    <p>
+                        初夏新葉替落紅，春景不存。<br>
+                        夕陽斜照城西樓，暮色遲留。
+                    </p>
+                </div>
             </div>
-            <h1>黔中极客</h1>
-            <p class="sub">QZGeek</p>
-            <div class="ornament">◆</div>
-        </header>
 
-        <!-- Poem -->
-        <div class="poem-block">
-            <p>
-                初夏新叶替落红，春景不存。<br>
-                夕阳斜照城西楼，暮色迟留。
-            </p>
-            <div class="seal">⿅ 黔中</div>
-        </div>
+            <!-- Links -->
+            <div class="link-bar">
+                <a href="https://qzgeek.cn">🌐 qzgeek.cn</a>
+                <a href="https://github.com/qzgeek">🐙 GitHub</a>
+                <a href="mailto:xcgeek@163.com">✉️ 郵件</a>
+            </div>
 
-        <!-- Links -->
-        <div class="links">
-            <a href="https://qzgeek.cn">🌐 qzgeek.cn</a>
-            <a href="https://github.com/qzgeek">🐙 GitHub</a>
-            <a href="mailto:xcgeek@163.com">✉️ 邮件</a>
-        </div>
-
-        <!-- About -->
-        <div class="section">
-            <div class="section-label">关 于</div>
-            <div class="about-card">
+            <!-- About -->
+            <div class="section-head">
+                <span></span> 關於 <span></span>
+            </div>
+            <div class="about">
                 <p>
-                    嗨，我是<strong>黔中极客</strong><br>
-                    一个热爱技术的在读学生<br>
-                    也是开源社区的新人
+                    嗨，我是<strong>黔中極客</strong><br>
+                    一個熱愛技術的在讀學生<br>
+                    也是開源社區的新人
                 </p>
-                <p style="margin-top:0.8rem; font-size:0.82rem;">
-                    💻 捣鼓代码 · ☁️ 折腾服务器 · 🖋 偶尔写诗
+                <p style="margin-top:0.6rem; font-size:0.8rem;">
+                    💻 搗鼓代碼 · ☁️ 折騰服務器 · 🖋 偶爾寫詩
                 </p>
             </div>
-        </div>
 
-        <!-- Stats -->
-        <div class="section">
-            <div class="section-label">统 计</div>
-            <div class="stats-wrap">
+            <!-- Stats -->
+            <div class="section-head">
+                <span></span> 統計 <span></span>
+            </div>
+            <div class="stats">
                 <img src="https://awesome-github-stats.azurewebsites.net/user-stats/qzgeek?cardType=level&theme=tokyonight&preferLogin=false" alt="GitHub Stats" loading="lazy">
             </div>
+
+            <!-- Colophon -->
+            <div class="colophon">
+                <div class="chop">黔</div>
+                <p class="era">丙午年 · 夏</p>
+                <p>黔中極客 手書</p>
+            </div>
         </div>
-
-        <footer>
-            <div class="chop">黔</div>
-            <p>© 二〇二六 黔中极客</p>
-        </footer>
     </div>
-
-    <script>
-    // Drifting leaves
-    const leaves = ['🍃', '🍂', '🌿'];
-    const c = document.getElementById('leaves');
-    function drop() {
-        const l = document.createElement('span');
-        l.className = 'leaf';
-        l.textContent = leaves[Math.floor(Math.random()*leaves.length)];
-        l.style.left = Math.random()*95 + '%';
-        l.style.animationDuration = (10+Math.random()*15) + 's';
-        c.appendChild(l);
-        setTimeout(() => l.remove(), 26000);
-    }
-    drop(); setInterval(drop, 4000);
-    </script>
 </body>
 </html>
